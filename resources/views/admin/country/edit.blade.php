@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'Countries')
+@section('title', 'FAQs')
 
 @section('content')
     @include('admin.includes.message')
@@ -21,9 +21,9 @@
                         <div class="col-md-8">
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-fullname">Name</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                    name="name" id="" value="{{ old('title', $country->name) }}" placeholder="">
-                                @error('title')
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" id="" value="{{ old('name', $country->name) }}" placeholder="">
+                                @error('name')
                                     <div class="invalid-feedback" style="display: block;">
                                         {{ $message }}
                                     </div>

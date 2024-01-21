@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CountryController;
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::resource('universities', UniversityController::class);
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('teams', TeamController::class);
+    Route::resource('faqs', FAQController::class);
 
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');

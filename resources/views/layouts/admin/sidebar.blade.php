@@ -74,10 +74,17 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Request::segment(2) == 'faqs' ? 'active' : '' }}">
+            <a class="menu-link" href="{{ route('admin.faqs.index') }}">
+                <i class="menu-icon fa fa-question-circle"></i>
+                <div data-i18n="Basic">FAQs</div>
+            </a>
+        </li>
+
         <!-- General Settings  -->
         <li class="menu-item @if (Request::segment(2) == 'settings') {{ 'active open' }} @endif">
             <a class="menu-link menu-toggle" href="javascript:void(0)">
-                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <i class="menu-icon tf-icons fa spin fa-gear"></i>
                 <div data-i18n="General Setting">Settings</div>
             </a>
             <ul class="menu-sub">
@@ -93,3 +100,5 @@
 
     </ul>
 </aside>
+
+

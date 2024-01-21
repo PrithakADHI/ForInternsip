@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'Countries')
+@section('title', 'FAQ')
 
 @section('content')
     @include('admin.includes.message')
@@ -7,21 +7,22 @@
     <div class="col-xl">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Create Country</h5>
+                <h5 class="mb-0">Edit FAQ</h5>
                 <small class="text-muted float-end">
-                    <a href="{{ route('admin.countries.index') }}" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i>
+                    <a href="{{ route('admin.faqs.index') }}" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i>
                         Back</a>
                 </small>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.countries.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.faqs.update', $faq->id) }}" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-8">
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-fullname">Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" id="" value="{{ old('name') }}" placeholder="">
+                                    name="name" id="" value="{{ old('name', $faq->name) }}" placeholder="">
                                 @error('name')
                                     <div class="invalid-feedback" style="display: block;">
                                         {{ $message }}
@@ -32,7 +33,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-fullname">Order</label>
                                 <input type="text" class="form-control"
-                                    name="order" id="" value="{{ old('order') }}" placeholder=""
+                                    name="order" id="" value="{{ old('order', $faq->order) }}" placeholder=""
                                     autocomplete="off">
                                 @error('order')
                                     <div class="invalid-feedback" style="display: block;">
@@ -44,7 +45,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-message">Description</label>
                                 <textarea id="" class="form-control @error('description') is-invalid @enderror ckeditor" name="description"
-                                    rows="8" placeholder="">{{ old('description') }}</textarea>
+                                    rows="8" placeholder="">{{ old('description', $faq->description) }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback" style="display: block;">
                                         {{ $message }}
@@ -55,7 +56,7 @@
                             <div class="mb-3">
                                 <label class="form-label" for="basic-default-message">Short Description</label>
                                 <textarea id="" class="form-control @error('short_description') is-invalid @enderror" name="short_description"
-                                    rows="4" placeholder="">{{ old('short_description') }}</textarea>
+                                    rows="4" placeholder="">{{ old('short_description', $faq->short_description) }}</textarea>
                                 @error('short_description')
                                     <div class="invalid-feedback" style="display: block;">
                                         {{ $message }}
@@ -69,6 +70,10 @@
                                     <input type="file" class="form-control @error('image') is-invalid @enderror image"
                                         name="image" id="">
                                     <img src="" height="100" alt="" class="view-image mt-2">
+                                    @if ($faq->image)
+                                        <img src="{{ asset('admin/images/faqs/' . $faq->image) }}" width="100"
+                                            class="mt-2 old-image">
+                                    @endif
                                     @error('image')
                                         <div class="invalid-feedback" style="display: block;">
                                             {{ $message }}
@@ -79,7 +84,7 @@
                             </div>
                         </div>
                         
-                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pencil"></i> Edit</button>
                 </form>
             </div>
         </div>
