@@ -8,4 +8,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('blogs', APIController::class);
+Route::get('mainAPI/{class}', [APIController::class, 'index']);
+Route::post('mainAPI/{class}', [APIController::class, 'store']);
+Route::get('mainAPI/{class}/{id}', [APIController::class, 'show']);
+Route::put('mainAPI/{class}/{id}', [APIController::class, 'update']);
+Route::delete('mainAPI/{class}/{id}', [APIController::class, 'destroy']);

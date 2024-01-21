@@ -1,5 +1,5 @@
 @extends('layouts.admin.master')
-@section('title', 'faqs')
+@section('title', 'FAQs')
 
 @section('content')
     @include('admin.includes.message')

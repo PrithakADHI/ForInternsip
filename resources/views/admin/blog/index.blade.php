@@ -30,9 +30,9 @@
                             <tr>
                                 <td><strong>{{ $key + $blogs->firstItem() }}</strong></td>
                                 <td class="">
-                                    <a href="{{ asset('admin/images/blog/') }}/{{ $blog->image ?: 'avatar.png' }}"
+                                    <a href="{{ $blog->image ?: 'avatar.png' }}"
                                         data-fancybox="demo" class="fancybox">
-                                        <img src="{{ asset('admin/images/blog/') }}/{{ $blog->image ?: 'avatar.png' }}"
+                                        <img src="{{ $blog->image ?: 'avatar.png' }}"
                                             alt="{{ $blog->title }}" width="80px">
                                     </a>
                                 </td>
