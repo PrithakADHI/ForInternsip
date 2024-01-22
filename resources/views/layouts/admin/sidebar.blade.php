@@ -95,6 +95,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Request::segment(2) == 'socialmedias' ? 'active' : '' }}">
+            <a class="menu-link" href="{{ route('admin.socialmedias.index') }}">
+                <i class="menu-icon fa fa-share-square"></i>
+                <div data-i18n="Basic">Socialmedias</div>
+            </a>
+        </li>
+
         <!-- General Settings  -->
         <li class="menu-item @if (Request::segment(2) == 'settings') {{ 'active open' }} @endif">
             <a class="menu-link menu-toggle" href="javascript:void(0)">

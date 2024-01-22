@@ -15,6 +15,7 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AchievementController;
+use App\Http\Controllers\Admin\SocialmediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::resource('faqs', FAQController::class);
     Route::resource('pages', PageController::class);
     Route::resource('sliders', SliderController::class);
+    Route::resource('socialmedias', SocialmediaController::class);
 
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
