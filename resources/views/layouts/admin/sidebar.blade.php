@@ -32,6 +32,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Request::segment(2) == 'pages' ? 'active' : '' }}">
+            <a class="menu-link" href="{{ route('admin.pages.index') }}">
+                <i class="menu-icon tf-icons fa fa-file-text"></i>
+                <div data-i18n="Basic">Pages</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ Request::segment(2) == 'countries' ? 'active' : '' }}">
             <a class="menu-link" href="{{ route('admin.countries.index') }}">
                 <i class="menu-icon fa fa-globe"></i>
@@ -78,6 +85,13 @@
             <a class="menu-link" href="{{ route('admin.faqs.index') }}">
                 <i class="menu-icon fa fa-question-circle"></i>
                 <div data-i18n="Basic">FAQs</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ Request::segment(2) == 'sliders' ? 'active' : '' }}">
+            <a class="menu-link" href="{{ route('admin.sliders.index') }}">
+                <i class="menu-icon fa fa-sliders"></i>
+                <div data-i18n="Basic">Sliders</div>
             </a>
         </li>
 

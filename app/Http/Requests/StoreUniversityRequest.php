@@ -27,6 +27,7 @@ class StoreUniversityRequest extends FormRequest
             'name' => 'required',
             'order' => 'required',
             'short_description' => 'required',
+            'description' => 'required',
             'image' => 'required|image',
         ];
     }

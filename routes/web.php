@@ -8,9 +8,11 @@ use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AchievementController;
 
@@ -44,6 +46,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::resource('testimonials', TestimonialController::class);
     Route::resource('teams', TeamController::class);
     Route::resource('faqs', FAQController::class);
+    Route::resource('pages', PageController::class);
+    Route::resource('sliders', SliderController::class);
 
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');

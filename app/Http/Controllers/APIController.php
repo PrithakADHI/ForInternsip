@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\FAQ;
 use App\Models\Blog;
+use App\Models\Page;
 use App\Models\Team;
 use App\Models\Course;
+use App\Models\Slider;
 use App\Models\Country;
 use App\Models\Service;
 use App\Models\University;
 use App\Models\Testimonial;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Admin\StoreBlogRequest;
@@ -48,19 +51,15 @@ class APIController extends Controller
     {
         try {
 
-            $validation = Validator::make($request->all(), [
-                'name' => 'required_without:title',
-                'title' => 'required_without:name',
-                'description' => 'required',
-                'short_description' => 'required',
-            ]);
+            $validation = Validator::make($request->all(), $this->getStoreValidation($class));
 
 
             if ($validation->fails()) {
                 return response()->json(['statusCode' => 401, 'error' => true, 'error_message' => $validation->errors(), 'message' => 'Please fill the input field properly']);
             }
 
-            $this->getObject($class)::create($request->all());
+            $stored_data = $this->getObject($class)::create($request->all());
+            $stored_data->update(['slug' => Str::slug($request->title)]);
 
             return response()->json([
                 "statusCode" => 200,
@@ -82,12 +81,20 @@ class APIController extends Controller
     {
         try {
             $blog = $this->getObject($class)::find($id);
+            if ($blog) {
             return response()->json([
                 "statusCode" => 200,
                 "error" => false,
                 "data" => $blog,
                 "message" => "Retrieved Successfully",
             ]);
+        } else {
+            return response()->json([
+                "statusCode" => 401,
+                "error" => true,
+                "message" => "No Data Found",
+            ]);
+        }
         } catch (\Exception $e) {
             return response()->json(['statusCode' => 401, 'error' => true, 'message' => $e->getMessage()]);
         }
@@ -163,6 +170,85 @@ class APIController extends Controller
             return Team::class;
         } else if ($class == 'faq') {
             return FAQ::class;
+        } else if ($class == 'page') {
+            return Page::class;
+        } else if ($class == 'slider') {
+            return Slider::class;
+        } else {
+            throw new Exception('Class Not Found');
+        }
+    }
+
+    public function getStoreValidation($class) {
+        if ($class == 'blog') {
+            return [
+                'title' => 'required',
+                'description' => 'required',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'country') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'course') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'service') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'university') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'testimonial') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'team') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'faq') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'page') {
+            return [
+                'name' => 'required',
+                'description' => 'required',
+                'order' => 'required|integer',
+                'short_description' => 'required',
+            ];
+        } else if ($class == 'slider') {
+            return [
+                'slogan' => 'required',
+                'title' => 'required',
+                'order' => 'required|integer',
+                'description' => 'required',
+            ];
         } else {
             throw new Exception('Class Not Found');
         }
